@@ -1,0 +1,3 @@
+[submodule ".config/waybar"]
+	path = .config/waybar
+	url = git@github.com:chowe99/waybar.git
