@@ -206,6 +206,11 @@ lspconfig.emmet_ls.setup {
 -- Plugins Configuration
 lvim.plugins = {
   { "mbbill/undotree" },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  },
   -- {
   --   "tpope/vim-fugitive",
   --   cmd = { "Git", "G" },
@@ -773,6 +778,22 @@ end
 vim.keymap.set("n", "<leader>oa", ToggleAllFolds, { desc = "Toggle All Folds" })
 vim.keymap.set("n", "<leader>oo", ToggleCurrentFold, { desc = "Toggle Current Fold" })
 
+-- Harpoon setup and keybindings
+local harpoon = require("harpoon")
+harpoon:setup()
+
+-- Define keybindings for Harpoon
+vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Add file to Harpoon" })
+vim.keymap.set("n", "<leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+  { desc = "Toggle Harpoon menu" })
+vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, { desc = "Select Harpoon file 1" })
+vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { desc = "Select Harpoon file 2" })
+vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, { desc = "Select Harpoon file 3" })
+vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, { desc = "Select Harpoon file 4" })
+vim.keymap.set("n", "<leader>hp", function() harpoon:list():prev() end, { desc = "Previous Harpoon file" })
+vim.keymap.set("n", "<leader>hn", function() harpoon:list():next() end, { desc = "Next Harpoon file" })
+
+
 -- which-key bindings
 lvim.builtin.which_key.mappings["o"] = {
   name = "Folds",
@@ -780,6 +801,18 @@ lvim.builtin.which_key.mappings["o"] = {
   o = { "<cmd>lua ToggleCurrentFold()<CR>", "Toggle Current Fold" },
 }
 
+--- Harpoon config
+lvim.builtin.which_key.mappings["h"] = {
+  name = "Harpoon",
+  a = { "<cmd>lua require('harpoon'):list():add()<cr>", "Add file" },
+  m = { "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", "Toggle menu" },
+  ["1"] = { "<cmd>lua require('harpoon'):list():select(1)<cr>", "Select file 1" },
+  ["2"] = { "<cmd>lua require('harpoon'):list():select(2)<cr>", "Select file 2" },
+  ["3"] = { "<cmd>lua require('harpoon'):list():select(3)<cr>", "Select file 3" },
+  ["4"] = { "<cmd>lua require('harpoon'):list():select(4)<cr>", "Select file 4" },
+  p = { "<cmd>lua require('harpoon'):list():prev()<cr>", "Previous file" },
+  n = { "<cmd>lua require('harpoon'):list():next()<cr>", "Next file" },
+}
 
 
 -- Additional Treesitter configurations
