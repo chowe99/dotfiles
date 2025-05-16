@@ -1,8 +1,0 @@
-[submodule ".config/lvim"]
-    path = .config/lvim
-    url = git@github.com:chowe99/lvim-conf.git
-
-[submodule ".config/waybar"]
-	path = .config/waybar
-	url = git@github.com:chowe99/waybar.git
-
