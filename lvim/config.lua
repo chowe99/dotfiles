@@ -728,6 +728,22 @@ lvim.builtin.treesitter.ensure_installed = {
   "lua",
 }
 
+-- Increase Lazy.nvim timeout
+require("lazy").setup({
+  spec = lvim.plugins,
+  git = {
+    timeout = 300, -- Increase git timeout to 5 minutes (in seconds)
+  },
+  install = {
+    missing = true,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = { "netrwPlugin" },
+    },
+  },
+})
+
 lvim.builtin.treesitter.highlight.enable = true
 lvim.builtin.treesitter.highlight.disable = { "csv" }
 lvim.builtin.treesitter.ignore_install = { "csv" }
