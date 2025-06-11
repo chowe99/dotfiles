@@ -614,7 +614,7 @@ lvim.plugins = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- Optional, for icons
       "MunifTanjim/nui.nvim",
-      -- { "edluffy/hologram.nvim" },   -- Add hologram.nvim as a dependency
+      { "edluffy/hologram.nvim" },   -- Add hologram.nvim as a dependency
     },
     config = function()
       require("neo-tree").setup({
@@ -627,6 +627,37 @@ lvim.plugins = {
               noremap = true,
               nowait = true,
             },
+            mappings = {
+              ["<leader>p"] = "image_preview", -- Map <leader>p to trigger image preview
+            },
+          },
+          commands = {
+            image_preview = function(state)
+              local node = state.tree:get_node()
+              if node.type == "file" then
+                local hologram = require("hologram")
+                hologram.setup {
+                  auto_display = false, -- Disable auto display for manual triggering
+                }
+                -- Create a floating window for image preview
+                local buf = vim.api.nvim_create_buf(false, true) -- Create a scratch buffer
+                local width = vim.o.columns * 0.5                -- Adjust width to 50% of the screen
+                local height = vim.o.lines * 0.5                 -- Adjust height to 50% of the screen
+                vim.api.nvim_open_win(buf, true, {               -- Open the floating window
+                  relative = "editor",
+                  width = math.floor(width),
+                  height = math.floor(height),
+                  row = math.floor((vim.o.lines - height) / 2), -- Center the window
+                  col = math.floor((vim.o.columns - width) / 2),
+                  style = "minimal",
+                  border = "rounded",
+                })
+                -- Display the image
+                require('hologram.image'):new(node.path):display(1, 1, buf, {}) -- Start at line 1, column 1
+              else
+                vim.notify("Not a valid image file!", vim.log.levels.WARN)
+              end
+            end,
           },
         },
       })
