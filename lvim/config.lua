@@ -205,6 +205,7 @@ lspconfig.emmet_ls.setup {
 
 -- Plugins Configuration
 lvim.plugins = {
+  { "mfussenegger/nvim-dap" },
   { "mbbill/undotree" },
   {
     "ThePrimeagen/harpoon",
@@ -287,36 +288,35 @@ lvim.plugins = {
     opts = {
       use_absolute_path = true,
       tokenizer = "tiktoken",
-      -- provider = "ollama",                           -- switched provider to local ollama
-      -- ollama = {
-      --   endpoint = "http://127.0.0.1:11434",         -- Note that there is no /v1 at the end.
-      --   model = "qwen2.5-coder:32b-instruct-q4_K_M", -- change to your desired model if necessary
-      -- },
-      -- provider = "claude",
-      -- claude = {
-      --   endpoint = "https://api.anthropic.com",
-      --   model = "claude-3-5-sonnet-20241022",
-      --   temperature = 0,
-      --   max_tokens = 8000,
-      --   timeout = 30000, -- Timeout in milliseconds
-      -- },
-      -- provider = "openai",
-      -- openai = {
-      --   endpoint = "https://api.openai.com/v1",
-      --   model = "o3-mini",
-      --   temperature = 0,
-      --   -- max_tokens = 8000,
-      --   timeout = 30000, -- Timeout in milliseconds
-      --   -- disable_tools = true,
-      -- },
-      provider = "gemini",
-      gemini = {
-        -- model = "gemini-2.5-pro-exp-03-25", -- or "gemini-pro-vision" if you need image capabilities
-        model = "gemini-2.5-flash-preview-04-17",
-        temperature = 0,
-        -- max_tokens = 8000,
-        -- disable_tools = true,
-        timeout = 30000, -- Timeout in milliseconds
+      providers = {
+        -- ollama = {
+        --   endpoint = "http://127.0.0.1:11434",         -- Note that there is no /v1 at the end.
+        --   model = "qwen2.5-coder:32b-instruct-q4_K_M", -- change to your desired model if necessary
+        -- },
+        -- claude = {
+        --   endpoint = "https://api.anthropic.com",
+        --   model = "claude-3-5-sonnet-20241022",
+        --   temperature = 0,
+        --   max_tokens = 8000,
+        --   timeout = 30000, -- Timeout in milliseconds
+        -- },
+        -- openai = {
+        --   endpoint = "https://api.openai.com/v1",
+        --   model = "o3-mini",
+        --   temperature = 0,
+        --   -- max_tokens = 8000,
+        --   timeout = 30000, -- Timeout in milliseconds
+        --   -- disable_tools = true,
+        -- },
+        gemini = {
+          -- model = "gemini-2.5-pro-exp-03-25", -- or "gemini-pro-vision" if you need image capabilities
+          model = "gemini-2.5-flash-preview-04-17",
+          temperature = 0,
+          -- max_tokens = 8000,
+          -- disable_tools = true,
+          timeout = 30000, -- Timeout in milliseconds
+        },
+
       },
 
       behaviour = {
